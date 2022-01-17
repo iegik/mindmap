@@ -4,7 +4,28 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "npm run build",
+    "build": "npm run esbuild && npm run sass",
+    "start": "npx serve -p 5001 ./public",
+    "sass": "./node_modules/.bin/sass src/main.scss public/css/main.min.css --style compressed",
+    "sass:watch": "npm run sass -- -w",
+    "esbuild": "./node_modules/.bin/esbuild src/*.ts src/*/*.ts --outdir=public/js/ --bundle --sourcemap --minify  --out-extension:.js=.min.js",
+    "esbuild:watch": "fswatch -o src/**/*.ts | xargs -n1 -I{} npm run esbuild",
+    "test": "./node_modules/.bin/tsc -noEmit src/**/*.ts || exit 1",
+    "lint": "npm run lint:eslint && npm run lint:prettier && npm run lint:stylelint",
+    "lint:eslint": "eslint --fix --ext .ts src/",
+    "lint:stylelint": "stylelint --fix \"src/**/*.scss\"",
+    "lint:prettier": "prettier --write src/**/**/*.{ts,scss}"
+  },
+  "lint-staged": {
+    "src/**/*.{ts}": "eslint --cache --fix --ext .ts",
+    "src/**/*.scss": "stylelint --fix scss",
+    "*.{ts,css,md}": "prettier --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "repository": {
     "type": "git",
@@ -20,6 +41,18 @@
   },
   "homepage": "https://github.com/iegik/mindmap#readme",
   "devDependencies": {
-    "serve": "^13.0.2"
+    "@typescript-eslint/parser": "^5.9.1",
+    "esbuild": "^0.14.11",
+    "eslint": "^8.7.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.7",
+    "prettier": "^2.5.1",
+    "sass": "^1.48.0",
+    "serve": "^13.0.2",
+    "stylelint": "^14.2.0",
+    "stylelint-scss": "^4.1.0",
+    "typescript": "^4.5.4"
   }
 }

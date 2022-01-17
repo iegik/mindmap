@@ -1,0 +1,46 @@
+{
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "rules": {
+    "selector-max-id": 1,
+    "no-empty-source": null,
+    "value-no-vendor-prefix": null,
+    "at-rule-no-vendor-prefix": true,
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": [
+          "composes",
+          "compose-with",
+          "font-smoothing"
+        ],
+        "ignoreSelectors": [":export", "/^:import/"]
+      }
+    ],
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": [
+          "export",
+          "import",
+          "global",
+          "local",
+          "external",
+          "horizontal"
+        ]
+      }
+    ],
+    "unit-allowed-list": [
+      "em",
+      "rem",
+      "s",
+      "px",
+      "%",
+      "deg",
+      "fr",
+      "vw",
+      "vh"
+    ]
+  }
+}
