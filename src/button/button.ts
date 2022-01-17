@@ -5,7 +5,7 @@ interface IButton extends IComponent {
 }
 
 const Button = (props:IButton) => {
-  const { children, title, onClick } = props
+  const { children, className, title, onClick } = props
   const ref = createRef()
   setTimeout(() => {
     if (onClick) {
@@ -13,7 +13,7 @@ const Button = (props:IButton) => {
     }
   })
 
-  return `<button class="btn" ref="${ref}" title="${title}">${children}</button>`
+  return `<button class="${className} btn" ref="${ref}" title="${title}">${children}</button>`
 }
 
 export default Button

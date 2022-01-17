@@ -12,13 +12,17 @@ const MindMapItem = (props:IMindMapItem) => {
 
   return `
     <div class="mindMapItem">
-      ${Card({ children: [
-    content,
-    Button({ children: ui.add, title: ui.add_node_title }),
-    Button({ children: ui.add, title: ui.add_subnode_title }),
-  ]})}
+      ${Card({
+    className: 'mindMapItem__content',
+    children: [
+      content,
+      Button({ children: ui.add, title: ui.add_node_title, className: 'mindMapItem__addNode' }),
+      Button({ children: ui.add, title: ui.add_subnode_title, className: 'mindMapItem__addSubNode' }),
+    ],
+  })}
       <div class="mindMapItem__subitems">
-        ${children.length ? children.join('') : children}
+        ${children?.length ? children.join('') : children || ''}
+        <div class="mindMapItem__dropArea">+</div>
       </div>
     </div>
   `

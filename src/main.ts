@@ -11,18 +11,18 @@ document.getElementById('root').innerHTML = Whiteboard({
     MindMapItem({
       content: 'Test1',
       children: [
-        MindMapItem({ content: 'Test3', children: [], button: Button, card: Card }),
+        MindMapItem({ content: 'Test3', button: Button, card: Card }),
         MindMapItem({
           content: 'Test4',
           children: [
-            MindMapItem({ content: 'Test5', children: [], button: Button, card: Card }),
-            MindMapItem({ content: 'Test6', children: [], button: Button, card: Card }),
+            MindMapItem({ content: 'Test5', button: Button, card: Card }),
+            MindMapItem({ content: 'Test6', button: Button, card: Card }),
           ],
           button: Button, card: Card
         }),
       ],
       button: Button, card: Card,
     }),
-    MindMapItem({ content: 'Test2', children: [], button: Button, card: Card }),
+    MindMapItem({ content: 'Test2', button: Button, card: Card }),
   ]
 });
