@@ -1,0 +1,25 @@
+{
+  "name": "mindmap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/iegik/mindmap.git"
+  },
+  "keywords": [
+    "mindmap"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iegik/mindmap/issues"
+  },
+  "homepage": "https://github.com/iegik/mindmap#readme",
+  "devDependencies": {
+    "serve": "^13.0.2"
+  }
+}
