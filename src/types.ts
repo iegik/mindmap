@@ -1,3 +1,3 @@
 interface IComponent {
-  children: string,
+  children: string | string[],
 }

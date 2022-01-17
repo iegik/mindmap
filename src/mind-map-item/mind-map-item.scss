@@ -1,7 +1,9 @@
-.whiteboard {
+.mindMapItem {
+  padding: 0.5rem;
+  position: relative;
+  margin: 0.5rem;
   display: flex;
   place-items: center;
   height: 100%;
   justify-content: center;
-  flex-direction: column;
 }
