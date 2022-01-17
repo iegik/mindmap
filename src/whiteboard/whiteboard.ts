@@ -4,7 +4,7 @@ interface IWhiteboard {
 
 const Whiteboard = (props:IWhiteboard) => {
   const { children } = props
-  return `<p class="whiteboard">${children}</p>`
+  return `<div class="whiteboard">${children}</div>`
 }
 
 export default Whiteboard
