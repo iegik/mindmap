@@ -1,8 +1,12 @@
 interface IWhiteboard extends IComponent {}
 
-const Whiteboard = (props:IWhiteboard) => {
-  const { children } = props
-  return `<div class="whiteboard">${children.length ? children.join('') : children}</div>`
-}
+const Whiteboard = (props: IWhiteboard) => {
+  const { children } = props;
+  const subitems = Array.isArray(children)
+    ? children.join('')
+    : children || '';
 
-export default Whiteboard
+  return `<div class="whiteboard">${subitems}</div>`;
+};
+
+export default Whiteboard;

@@ -1,4 +1,4 @@
 interface IComponent {
-  children: string | string[],
-  className?: string,
+  children: string | string[];
+  className?: string;
 }

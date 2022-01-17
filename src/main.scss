@@ -3,9 +3,10 @@
 @import './mind-map-item/mind-map-item.scss';
 
 :root {
-  --font-sans-serif: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans-serif: -apple-system, system-ui, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
-  --color-grayscale: rgba(127,127,127, 0.5);
+  --color-grayscale: rgba(127, 127, 127, 0.5);
   --font-size-xs: 0.8rem;
   --font-size-s: 1rem;
   --font-size-m: 1.4rem;
@@ -16,7 +17,9 @@
   --mind-map-item-height: 5rem;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   margin: 0;
   padding: 0;
   width: 100%;

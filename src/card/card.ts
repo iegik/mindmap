@@ -1,11 +1,14 @@
-import { useRef } from '@app/view'
+import { useRef } from '@app/view';
 
 interface ICard extends IComponent {}
 
-const Card = (props:ICard) => {
-  const { children, className } = props
+const Card = (props: ICard) => {
+  const { children, className } = props;
+  const subitems = Array.isArray(children)
+    ? children.join('')
+    : children || '';
 
-  return `<div class="${className} card">${children.length ? children.join('') : children}</div>`
-}
+  return `<div class="${className} card">${subitems}</div>`;
+};
 
-export default Card
+export default Card;
