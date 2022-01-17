@@ -1,6 +1,4 @@
-interface IWhiteboard {
-  children: string
-}
+interface IWhiteboard extends IComponent {}
 
 const Whiteboard = (props:IWhiteboard) => {
   const { children } = props
