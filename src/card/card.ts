@@ -1,5 +1,3 @@
-import { useRef } from '@app/view';
-
 interface ICard extends IComponent {}
 
 const Card = (props: ICard) => {

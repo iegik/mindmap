@@ -58,6 +58,11 @@ class NestedSet {
 
   getRoot = () => this.getNodes()[0];
 
+  getMaxId = () => this.Structure.reduce(
+    (a, { _id }) => (a > _id ? a : _id),
+    -Infinity,
+  );
+
   addNode = (targetNodeId: number, itemId: number) => {
     if (this.Data[itemId] !== undefined) {
       var parentNode = this.getNode(targetNodeId, true);
@@ -66,10 +71,7 @@ class NestedSet {
         return false;
       }
 
-      var maxId = this.Structure.reduce(
-        (a, { _id }) => (a > _id ? a : _id),
-        -Infinity,
-      );
+      var maxId = this.getMaxId()
 
       this.Structure = this.Structure.map((n) => {
         if (n.lkey > parentNode.rkey) {

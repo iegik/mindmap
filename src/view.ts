@@ -1,6 +1,6 @@
 class Ref {
   toString() {
-    const id = Math.random();
+    const id = Math.round(Math.random() * 1000000).toString(36);
     return (this.id = this.id || `ref-${id}`);
   }
   get current() {

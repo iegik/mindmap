@@ -7,6 +7,8 @@ interface IMindMapItem extends IComponent {
   content: string;
   onAddChild?: (event: MouseEvent) => void;
   onAddSibling?: (event: MouseEvent) => void;
+  hasParent: boolean;
+  allowNext: boolean;
 }
 
 const MindMapItem = (props: IMindMapItem) => {
@@ -15,29 +17,36 @@ const MindMapItem = (props: IMindMapItem) => {
     content,
     button: Button,
     card: Card,
+    text: Text,
     onAddChild,
     onAddSibling,
+    hasParent,
+    allowNext,
   } = props;
   const subitems = Array.isArray(children)
     ? children.join('')
     : children || '';
 
+  const controls = []
+  if (hasParent) controls.push(Button({
+    children: ui.add,
+    title: ui.add_subnode_title,
+    className: 'mindMapItem__addSubNode',
+    onClick: onAddSibling,
+  }))
+
+  if (allowNext) controls.push(Button({
+    children: ui.add,
+    title: ui.add_node_title,
+    className: 'mindMapItem__addNode',
+    onClick: onAddChild,
+  }))
+
   const card = Card({
     className: 'mindMapItem__content',
     children: [
-      content,
-      Button({
-        children: ui.add,
-        title: ui.add_node_title,
-        className: 'mindMapItem__addNode',
-        onClick: onAddChild,
-      }),
-      Button({
-        children: ui.add,
-        title: ui.add_subnode_title,
-        className: 'mindMapItem__addSubNode',
-        onClick: onAddSibling,
-      }),
+      Text({ data: content }),
+      ...controls,
     ],
   });
 
