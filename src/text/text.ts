@@ -1,13 +1,13 @@
 interface IText extends IComponent {
-  data?: string;
+  value?: string;
 }
 
 const Text = (props: IText) => {
-  const { className, data } = props;
+  const { className, value } = props;
 
   p = document.createElement('p')
   p.classList.add(className)
-  p.innerText = data
+  p.innerText = value
   return p.innerHTML
 };
 

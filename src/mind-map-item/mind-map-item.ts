@@ -7,6 +7,7 @@ interface IMindMapItem extends IComponent {
   content: string;
   onAddChild?: (event: MouseEvent) => void;
   onAddSibling?: (event: MouseEvent) => void;
+  onChange?: (event: KeyboardEvent) => void;
   hasParent: boolean;
   allowNext: boolean;
 }
@@ -14,12 +15,13 @@ interface IMindMapItem extends IComponent {
 const MindMapItem = (props: IMindMapItem) => {
   const {
     children,
-    content,
+    value,
     button: Button,
     card: Card,
     text: Text,
     onAddChild,
     onAddSibling,
+    onChange,
     hasParent,
     allowNext,
   } = props;
@@ -43,9 +45,9 @@ const MindMapItem = (props: IMindMapItem) => {
   }))
 
   const card = Card({
-    className: 'mindMapItem__content',
+    className: 'mindMapItem__value',
     children: [
-      Text({ data: content }),
+      Text({ value, onChange }),
       ...controls,
     ],
   });

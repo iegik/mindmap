@@ -2,7 +2,7 @@ declare const document: HTMLDocument;
 import Whiteboard from '@app/whiteboard/whiteboard';
 import Button from '@app/button/button';
 import Card from '@app/card/card';
-import Text from '@app/text/text';
+import ITextInput from '@app/text-input/text-input';
 import MindMapItem from '@app/mind-map-item/mind-map-item';
 import NestedSet from '@app/nested-set';
 import ui from '@app/l18n/ui.json';
@@ -25,15 +25,15 @@ const type_node_id = tree.addNode(root_node_id, 2);
 
 const renderTree = (itemId: number) => {
   const childs = tree.getChilds(itemId, 1);
-  const content = tree.getItem(itemId);
+  const value = tree.getItem(itemId);
   const parent = tree.getParent(itemId);
 
   return MindMapItem({
-    content,
+    value,
     children: childs.map((child:INode) => renderTree(child.itemId)),
     button: Button,
     card: Card,
-    text: Text,
+    text: ITextInput,
     onAddChild: (e) => {
       const nextId = tree.getMaxId() + 1
 
@@ -55,6 +55,9 @@ const renderTree = (itemId: number) => {
       document.getElementById('root').innerHTML = Whiteboard({
         children: [renderTree(tree.getRoot().itemId)],
       });
+    },
+    onChange: (e) => {
+      tree.setItem(itemId, e.target.value)
     },
     hasParent: parent !== false,
     allowNext: true,
