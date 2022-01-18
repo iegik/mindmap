@@ -31,14 +31,14 @@ const MindMapItem = (props: IMindMapItem) => {
 
   const controls = []
   if (hasParent) controls.push(Button({
-    children: ui.add,
+    children: ui.add_subnode,
     title: ui.add_subnode_title,
     className: 'mindMapItem__addSubNode',
     onClick: onAddSibling,
   }))
 
   if (allowNext) controls.push(Button({
-    children: ui.add,
+    children: ui.add_node,
     title: ui.add_node_title,
     className: 'mindMapItem__addNode',
     onClick: onAddChild,
@@ -47,7 +47,7 @@ const MindMapItem = (props: IMindMapItem) => {
   const card = Card({
     className: 'mindMapItem__value',
     children: [
-      Text({ value, onChange }),
+      Text({ value, onChange, multiline: true, className: 'mindMapItem__input'}),
       ...controls,
     ],
   });

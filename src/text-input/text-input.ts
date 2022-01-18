@@ -3,10 +3,11 @@ import { createRef } from '@app/view';
 interface ITextInput extends IComponent {
   value?: string
   onChange?: (event: KeyboardEvent) => void;
+  multiline?: boolean;
 }
 
 const TextInput = (props: ITextInput) => {
-  const { value, className, onChange } = props;
+  const { value, className = '', onChange, multiline } = props;
   const ref = createRef();
 
   setTimeout(() => {
@@ -15,7 +16,12 @@ const TextInput = (props: ITextInput) => {
       ref.current.addEventListener('blur', onChange);
     }
   });
-  return `<input class="${className} input" value="${value}" ref="${ref}" />`;
+
+  if (multiline) {
+    return `<textarea class="${className} text-input text-input--multiline" ref="${ref}">${value}</textarea>`;
+  }
+
+  return `<input class="${className} text-input" value="${value}" ref="${ref}" />`;
 };
 
 export default TextInput;

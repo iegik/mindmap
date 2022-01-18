@@ -1,7 +1,8 @@
 {
   "greetings": "Hello, World!",
   "title": "Mindmap example",
-  "add": "+",
+  "add_node": "→",
+  "add_subnode": "↓",
   "remove": "-",
   "move_title": "Drag item to move",
   "add_node_title": "Add node",

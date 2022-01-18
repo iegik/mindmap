@@ -11,8 +11,14 @@
 
 .mindMapItem__value {
   position: relative;
+}
+
+.mindMapItem__input {
+  display: grid;
+  place-items: center;
   min-width: var(--mind-map-item-width);
   min-height: var(--mind-map-item-height);
+  border: none;
 }
 
 .mindMapItem__subitems {
