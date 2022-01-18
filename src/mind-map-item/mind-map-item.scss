@@ -11,6 +11,7 @@
 
 .mindMapItem__value {
   position: relative;
+  -webkit-user-drag: element;
 }
 
 .mindMapItem__input {
@@ -26,14 +27,18 @@
 .mindMapItem__subitems {
   display: grid;
   place-items: center;
+  position: relative;
+  .mindMapItem__value:hover ~ & {
+    min-width: var(--mind-map-item-width);
+    min-height: var(--mind-map-item-height);
+  }
 }
 
 .mindMapItem__dropArea {
   display: grid;
   place-items: center;
-  place-self: start;
-  width: var(--mind-map-item-width);
-  height: var(--mind-map-item-height);
+  min-width: var(--mind-map-item-width);
+  min-height: var(--mind-map-item-height);
   box-sizing: border-box;
   font-family: var(--font-sans-serif);
   font-size: var(--font-size-l);
@@ -41,9 +46,19 @@
   border: 0.25rem dashed var(--color-grayscale);
   color: var(--color-grayscale);
   opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
   margin: 1rem;
+  margin-left: calc(var(--mind-map-item-width) + 2rem);
+  // margin-right: calc(var(--mind-map-item-width) + 2rem);
+  width: calc(100% - (var(--mind-map-item-width) + (1rem * 4)));
+  height: calc(100% - (1rem * 2));
+  // width: -webkit-fill-available;
+  // height: -webkit-fill-available;
 
-  &:hover {
+  .mindMapItem__value:hover + & {
     opacity: 1;
   }
 }
@@ -55,8 +70,12 @@
   height: 1.5rem;
   background-color: transparent;
   border: none;
+  opacity: 0;
   &:hover {
     font-size: larger;
+  }
+  .mindMapItem__value:hover & {
+    opacity: 1;
   }
 }
 
@@ -67,8 +86,12 @@
   height: 1.5rem;
   background-color: transparent;
   border: none;
+  opacity: 0;
   &:hover {
     font-size: larger;
+  }
+  .mindMapItem__value:hover & {
+    opacity: 1;
   }
 }
 
@@ -80,7 +103,11 @@
   height: 1.5rem;
   background-color: transparent;
   border: none;
+  opacity: 0;
   &:hover {
     font-size: larger;
+  }
+  .mindMapItem__value:hover & {
+    opacity: 1;
   }
 }

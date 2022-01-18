@@ -78,9 +78,9 @@ const MindMapItem = (props: IMindMapItem) => {
   return `
     <div class="mindMapItem">
       ${card}
+      <div class="mindMapItem__dropArea">+</div>
       <div class="mindMapItem__subitems">
         ${subitems}
-        <div class="mindMapItem__dropArea">+</div>
       </div>
     </div>
   `;
