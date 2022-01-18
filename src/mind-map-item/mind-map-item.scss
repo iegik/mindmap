@@ -19,6 +19,8 @@
   min-width: var(--mind-map-item-width);
   min-height: var(--mind-map-item-height);
   border: none;
+  background-color: var(--mind-map-item-bg-color);
+  color: var(--mind-map-item-fg-color);
 }
 
 .mindMapItem__subitems {
@@ -51,6 +53,11 @@
   right: -1rem;
   width: 1.5rem;
   height: 1.5rem;
+  background-color: transparent;
+  border: none;
+  &:hover {
+    font-size: larger;
+  }
 }
 
 .mindMapItem__addSubNode {
@@ -58,6 +65,11 @@
   bottom: -1rem;
   width: 1.5rem;
   height: 1.5rem;
+  background-color: transparent;
+  border: none;
+  &:hover {
+    font-size: larger;
+  }
 }
 
 .mindMapItem__removeNode {
@@ -66,4 +78,9 @@
   right: -1rem;
   width: 1.5rem;
   height: 1.5rem;
+  background-color: transparent;
+  border: none;
+  &:hover {
+    font-size: larger;
+  }
 }
