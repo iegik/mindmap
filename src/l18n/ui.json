@@ -3,7 +3,7 @@
   "title": "Mindmap example",
   "add_node": "→",
   "add_subnode": "↓",
-  "remove": "-",
+  "remove_node": "✕",
   "move_title": "Drag item to move",
   "add_node_title": "Add node",
   "add_subnode_title": "Add subnode"

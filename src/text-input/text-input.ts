@@ -1,7 +1,7 @@
 import { createRef } from '@app/view';
 
 interface ITextInput extends IComponent {
-  value?: string
+  value?: string;
   onChange?: (event: KeyboardEvent) => void;
   multiline?: boolean;
 }

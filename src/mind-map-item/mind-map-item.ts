@@ -7,6 +7,7 @@ interface IMindMapItem extends IComponent {
   content: string;
   onAddChild?: (event: MouseEvent) => void;
   onAddSibling?: (event: MouseEvent) => void;
+  onRemoveChild?: (event: MouseEvent) => void;
   onChange?: (event: KeyboardEvent) => void;
   hasParent: boolean;
   allowNext: boolean;
@@ -21,6 +22,7 @@ const MindMapItem = (props: IMindMapItem) => {
     text: Text,
     onAddChild,
     onAddSibling,
+    onRemoveChild,
     onChange,
     hasParent,
     allowNext,
@@ -29,25 +31,46 @@ const MindMapItem = (props: IMindMapItem) => {
     ? children.join('')
     : children || '';
 
-  const controls = []
-  if (hasParent) controls.push(Button({
-    children: ui.add_subnode,
-    title: ui.add_subnode_title,
-    className: 'mindMapItem__addSubNode',
-    onClick: onAddSibling,
-  }))
+  const controls = [];
+  if (hasParent)
+    controls.push(
+      Button({
+        children: ui.add_subnode,
+        title: ui.add_subnode_title,
+        className: 'mindMapItem__addSubNode',
+        onClick: onAddSibling,
+      }),
+    );
 
-  if (allowNext) controls.push(Button({
-    children: ui.add_node,
-    title: ui.add_node_title,
-    className: 'mindMapItem__addNode',
-    onClick: onAddChild,
-  }))
+  if (allowNext)
+    controls.push(
+      Button({
+        children: ui.add_node,
+        title: ui.add_node_title,
+        className: 'mindMapItem__addNode',
+        onClick: onAddChild,
+      }),
+    );
+
+  if (allowNext)
+    controls.push(
+      Button({
+        children: ui.remove_node,
+        title: ui.remove_node_title,
+        className: 'mindMapItem__removeNode',
+        onClick: onRemoveChild,
+      }),
+    );
 
   const card = Card({
     className: 'mindMapItem__value',
     children: [
-      Text({ value, onChange, multiline: true, className: 'mindMapItem__input'}),
+      Text({
+        value,
+        onChange,
+        multiline: true,
+        className: 'mindMapItem__input',
+      }),
       ...controls,
     ],
   });
