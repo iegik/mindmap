@@ -28,10 +28,10 @@
   display: grid;
   place-items: center;
   position: relative;
-  .mindMapItem__value:hover ~ & {
-    min-width: var(--mind-map-item-width);
-    min-height: var(--mind-map-item-height);
-  }
+  // .mindMapItem__value:hover ~ & {
+  //   min-width: var(--mind-map-item-width);
+  //   min-height: var(--mind-map-item-height);
+  // }
 }
 
 .mindMapItem__dropArea {
@@ -58,9 +58,9 @@
   // width: -webkit-fill-available;
   // height: -webkit-fill-available;
 
-  .mindMapItem__value:hover + & {
-    opacity: 1;
-  }
+  // .mindMapItem__value:hover + & {
+  //   opacity: 1;
+  // }
 }
 
 .mindMapItem__addNode {
