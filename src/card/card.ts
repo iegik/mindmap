@@ -1,7 +1,7 @@
 interface ICard extends IComponent {}
 
 const Card = (props: ICard) => {
-  const { children, className } = props;
+  const { children, className = '' } = props;
   const subitems = Array.isArray(children)
     ? children.join('')
     : children || '';

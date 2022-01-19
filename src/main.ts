@@ -48,6 +48,8 @@ const renderTree = (itemId: number = 1) => {
     button: Button,
     card: Card,
     text: ITextInput,
+    itemId,
+    draggable: true,
     onAddChild: (e) => {
       const nextId = tree.getMaxId() + 1;
 
@@ -68,6 +70,19 @@ const renderTree = (itemId: number = 1) => {
     },
     onRemoveChild: (e) => {
       tree.removeItem(itemId);
+
+      // FIXME: Rerender
+      render()
+    },
+    onMoveChild: (e) => {
+      e.preventDefault();
+      const src = JSON.parse(e.dataTransfer.getData("text/plain"))
+
+      try {
+        tree.moveNode(+src.itemId, itemId);
+      } catch (e) {
+        alert(e.message)
+      }
 
       // FIXME: Rerender
       render()

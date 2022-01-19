@@ -1,4 +1,4 @@
-import { useRef } from '@app/view';
+import { createRef } from '@app/view';
 import ui from '@app/l18n/ui.json';
 
 interface IMindMapItem extends IComponent {
@@ -8,9 +8,12 @@ interface IMindMapItem extends IComponent {
   onAddChild?: (event: MouseEvent) => void;
   onAddSibling?: (event: MouseEvent) => void;
   onRemoveChild?: (event: MouseEvent) => void;
+  onMoveChild?: (event: MouseEvent) => void;
   onChange?: (event: KeyboardEvent) => void;
   hasParent: boolean;
   allowNext: boolean;
+  itemId: number;
+  draggable?: boolean;
 }
 
 const MindMapItem = (props: IMindMapItem) => {
@@ -23,13 +26,26 @@ const MindMapItem = (props: IMindMapItem) => {
     onAddChild,
     onAddSibling,
     onRemoveChild,
+    onMoveChild,
     onChange,
     hasParent,
     allowNext,
+    itemId,
+    draggable = false,
   } = props;
+  const ref = createRef();
   const subitems = Array.isArray(children)
     ? children.join('')
     : children || '';
+
+  setTimeout(() => {
+    if (draggable && onMoveChild) {
+      ref.current.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData("text/plain", JSON.stringify({ itemId }))
+      });
+      ref.current.addEventListener('drop', onMoveChild);
+    }
+  });
 
   const controls = [];
   if (hasParent)
@@ -63,7 +79,6 @@ const MindMapItem = (props: IMindMapItem) => {
     );
 
   const card = Card({
-    className: 'mindMapItem__value',
     children: [
       Text({
         value,
@@ -77,7 +92,9 @@ const MindMapItem = (props: IMindMapItem) => {
 
   return `
     <div class="mindMapItem">
-      ${card}
+      <div class="mindMapItem__value" ref="${ref}"  draggable="${draggable}">
+        ${card}
+      </div>
       <div class="mindMapItem__dropArea"></div>
       <div class="mindMapItem__subitems">
         ${subitems}
