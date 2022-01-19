@@ -29,10 +29,12 @@
   display: grid;
   place-items: center;
   position: relative;
-  // .mindMapItem__value:hover ~ & {
-  //   min-width: var(--mind-map-item-width);
-  //   min-height: var(--mind-map-item-height);
-  // }
+  /*
+  .mindMapItem__value:hover ~ & {
+    min-width: var(--mind-map-item-width);
+    min-height: var(--mind-map-item-height);
+  }
+  */
 }
 
 .mindMapItem__dropArea {
@@ -53,15 +55,17 @@
   z-index: -1;
   margin: 1rem;
   margin-left: calc(var(--mind-map-item-width) + 2rem);
-  // margin-right: calc(var(--mind-map-item-width) + 2rem);
+  /* margin-right: calc(var(--mind-map-item-width) + 2rem); */
   width: calc(100% - (var(--mind-map-item-width) + (1rem * 4)));
   height: calc(100% - (1rem * 2));
-  // width: -webkit-fill-available;
-  // height: -webkit-fill-available;
+  /* width: -webkit-fill-available; */
+  /* height: -webkit-fill-available; */
 
-  // .mindMapItem__value:hover + & {
-  //   opacity: 1;
-  // }
+  /*
+  .mindMapItem__value:hover + & {
+    opacity: 1;
+  }
+  */
 }
 
 .mindMapItem__addNode {
