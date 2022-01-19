@@ -41,7 +41,10 @@ const MindMapItem = (props: IMindMapItem) => {
   setTimeout(() => {
     if (draggable && onMoveChild) {
       ref.current.addEventListener('dragstart', (e) => {
-        e.dataTransfer.setData("text/plain", JSON.stringify({ itemId }))
+        e.dataTransfer.setData(
+          'text/plain',
+          JSON.stringify({ itemId }),
+        );
       });
       ref.current.addEventListener('drop', onMoveChild);
     }

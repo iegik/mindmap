@@ -10,15 +10,19 @@ import ui from '@app/l18n/ui.json';
 const tree = new NestedSet();
 
 const loadData = () => {
-  const [Structure = [], Data = {}] = JSON.parse(localStorage.getItem('save') || '[]');
+  const [Structure = [], Data = {}] = JSON.parse(
+    localStorage.getItem('save') || '[]',
+  );
   tree.Structure = Structure;
   tree.Data = Data;
-}
+};
 
 const saveData = () => {
-  localStorage.setItem('save', JSON.stringify([tree.Structure, tree.Data]))
-}
-
+  localStorage.setItem(
+    'save',
+    JSON.stringify([tree.Structure, tree.Data]),
+  );
+};
 
 // tree.setItem(1, 'Root');
 // tree.setItem(2, 'Type');
@@ -43,7 +47,7 @@ const render = () => {
   // document.getElementById('root').innerHTML += `
   //   <pre id="test">${tree.debug()}</pre>
   // `;
-}
+};
 
 const renderTree = (itemId: number = 1) => {
   if (!tree.getRoot()) {
@@ -84,25 +88,25 @@ const renderTree = (itemId: number = 1) => {
       tree.removeItem(itemId);
 
       // FIXME: Rerender
-      render()
+      render();
     },
     onMoveChild: (e) => {
       e.preventDefault();
-      const src = JSON.parse(e.dataTransfer.getData("text/plain"))
+      const src = JSON.parse(e.dataTransfer.getData('text/plain'));
 
       try {
         tree.moveNode(+src.itemId, itemId);
       } catch (e) {
-        alert(e.message)
+        alert(e.message);
       }
 
       // FIXME: Rerender
-      render()
+      render();
     },
     onChange: (e) => {
       tree.setItem(itemId, e.target.value);
 
-      saveData()
+      saveData();
     },
     hasParent: parent !== false,
     allowNext: true,
@@ -110,5 +114,5 @@ const renderTree = (itemId: number = 1) => {
 };
 
 document.title = ui.title;
-loadData()
-render()
+loadData();
+render();
