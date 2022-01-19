@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "npm run build",
     "build": "npm run esbuild && npm run sass",
-    "start": "npx serve -p 5001 ./public",
+    "start": "npx vite --port 5001 ./public",
     "sass": "./node_modules/.bin/sass src/main.scss public/css/main.min.css --style compressed",
     "sass:watch": "npm run sass -- -w",
     "esbuild": "./node_modules/.bin/esbuild src/*.ts src/*/*.ts --outdir=public/js/ --bundle --sourcemap --minify  --out-extension:.js=.min.js",
