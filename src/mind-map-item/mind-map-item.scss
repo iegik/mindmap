@@ -1,17 +1,17 @@
 .mindMapItem {
-  padding: 0.5rem;
   position: relative;
-  margin: 0.5rem;
-  display: flex;
+  display: -webkit-box;
   place-items: center;
   place-self: start;
   justify-content: center;
-  gap: 1rem;
+  gap: 2rem;
+  -webkit-box-align: center;
 }
 
 .mindMapItem__value {
   position: relative;
   -webkit-user-drag: element;
+  margin: 1rem 0;
 }
 
 .mindMapItem__input {

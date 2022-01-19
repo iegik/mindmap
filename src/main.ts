@@ -28,9 +28,9 @@ const render = () => {
     children: [renderTree(tree.getRoot()?.itemId)],
   });
 
-  document.getElementById('root').innerHTML += `
-    <pre id="test">${tree.debug()}</pre>
-  `;
+  // document.getElementById('root').innerHTML += `
+  //   <pre id="test">${tree.debug()}</pre>
+  // `;
 }
 
 const renderTree = (itemId: number = 1) => {
