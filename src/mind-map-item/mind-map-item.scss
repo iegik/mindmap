@@ -2,10 +2,11 @@
   position: relative;
   display: -webkit-box;
   place-items: center;
-  place-self: start;
+  place-self: var(--mind-map-place);
   justify-content: center;
   gap: 2rem;
-  -webkit-box-align: center;
+  -webkit-box-align: var(--mind-map-align);
+  -webkit-box-direction: var(--mind-map-direction);
 }
 
 .mindMapItem__value {
