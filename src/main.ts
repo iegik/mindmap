@@ -42,7 +42,11 @@ const fromBinary = (encoded) => {
 
 const pack = (data) => toBinary(JSON.stringify(data, null, 2));
 const unpack = (data, alt = '{}') =>
-  data && JSON.parse(fromBinary(data) || alt);
+  JSON.parse(data ? fromBinary(data) : alt);
+
+// window.pack = pack;
+// window.unpack = unpack;
+// window.tree = tree;
 
 let saveName = 'save';
 const storageKey = 'mind-map-item';
@@ -53,22 +57,28 @@ const getStore = () => {
 };
 
 const loadData = () => {
+  const store = getStore() || {}
   const {
-    [saveName]: { data } = {},
-  } = getStore() || {};
+    [saveName]: savedData,
+  } = store;
+  const { data } = savedData || {};
+
   return data;
 };
 
 const saveData = () => {
   const data = pack([tree.Structure, tree.Data]);
   undoHistory.push(data);
+  // redoHistory = [];
+  const store = getStore();
   const {
-    [saveName]: { data: prev },
+    [saveName]: savedData,
     ...other
-  } = getStore();
+  } = store
+
   localStorage.setItem(
     storageKey,
-    pack({ ...other, [saveName]: data }),
+    pack({ ...other, [saveName]: { data } }),
   );
 };
 
@@ -176,6 +186,7 @@ const renderTree = (itemId: number = 1) => {
 
       try {
         tree.moveNode(+src.itemId, itemId);
+        saveData();
       } catch (e) {
         alert(e.message);
       }
