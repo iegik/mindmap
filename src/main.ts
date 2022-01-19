@@ -8,6 +8,18 @@ import NestedSet from '@app/nested-set';
 import ui from '@app/l18n/ui.json';
 
 const tree = new NestedSet();
+
+const loadData = () => {
+  const [Structure = [], Data = {}] = JSON.parse(localStorage.getItem('save') || '[]');
+  tree.Structure = Structure;
+  tree.Data = Data;
+}
+
+const saveData = () => {
+  localStorage.setItem('save', JSON.stringify([tree.Structure, tree.Data]))
+}
+
+
 // tree.setItem(1, 'Root');
 // tree.setItem(2, 'Type');
 // tree.setItem(3, 'Type2');
@@ -89,6 +101,8 @@ const renderTree = (itemId: number = 1) => {
     },
     onChange: (e) => {
       tree.setItem(itemId, e.target.value);
+
+      saveData()
     },
     hasParent: parent !== false,
     allowNext: true,
@@ -96,4 +110,5 @@ const renderTree = (itemId: number = 1) => {
 };
 
 document.title = ui.title;
+loadData()
 render()

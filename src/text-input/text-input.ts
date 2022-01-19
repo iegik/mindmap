@@ -12,7 +12,7 @@ const TextInput = (props: ITextInput) => {
 
   setTimeout(() => {
     if (onChange) {
-      // ref.current.addEventListener('input', onChange);
+      ref.current.addEventListener('input', onChange);
       ref.current.addEventListener('blur', onChange);
     }
   });
