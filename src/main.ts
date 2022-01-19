@@ -8,21 +8,101 @@ import NestedSet from '@app/nested-set';
 import ui from '@app/l18n/ui.json';
 
 const tree = new NestedSet();
+let undoHistory, redoHistory;
 
-const loadData = () => {
-  const [Structure = [], Data = {}] = JSON.parse(
-    localStorage.getItem('save') || '[]',
-  );
+const restoreData = (data?: INestedSet) => {
+  const [Structure = [], Data = {}] = data || [];
   tree.Structure = Structure;
   tree.Data = Data;
 };
 
-const saveData = () => {
-  localStorage.setItem(
-    'save',
-    JSON.stringify([tree.Structure, tree.Data]),
+const clearHistory = () => {
+  undoHistory = [];
+  redoHistory = [];
+};
+
+const toBinary = (string) => {
+  const codeUnits = new Uint16Array(string.length);
+  for (let i = 0; i < codeUnits.length; i++) {
+    codeUnits[i] = string.charCodeAt(i);
+  }
+  return btoa(
+    String.fromCharCode(...new Uint8Array(codeUnits.buffer)),
   );
 };
+
+const fromBinary = (encoded) => {
+  binary = atob(encoded);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < bytes.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return String.fromCharCode(...new Uint16Array(bytes.buffer));
+};
+
+const pack = (data) => toBinary(JSON.stringify(data, null, 2));
+const unpack = (data, alt = '{}') =>
+  data && JSON.parse(fromBinary(data) || alt);
+
+let saveName = 'save';
+const storageKey = 'mind-map-item';
+const getStore = () => {
+  const storage = localStorage.getItem(storageKey)
+
+  return unpack(storage, '{}')
+};
+
+const loadData = () => {
+  const {
+    [saveName]: { data } = {},
+  } = getStore() || {};
+  return data;
+};
+
+const saveData = () => {
+  const data = pack([tree.Structure, tree.Data]);
+  undoHistory.push(data);
+  const {
+    [saveName]: { data: prev },
+    ...other
+  } = getStore();
+  localStorage.setItem(
+    storageKey,
+    pack({ ...other, [saveName]: data }),
+  );
+};
+
+const undo = () => {
+  if (undoHistory.length === 0) return;
+  redoHistory.push(pack([tree.Structure, tree.Data]));
+  restoreData(unpack(undoHistory.pop(), '[]'));
+  render();
+};
+
+const redo = () => {
+  if (redoHistory.length === 0) return;
+  undoHistory.push(pack([tree.Structure, tree.Data]));
+  restoreData(unpack(redoHistory.pop(), '[]'));
+  render();
+};
+
+(async () => {
+  const keyboardLayoutMap = await navigator.keyboard.getLayoutMap();
+  enum keys {
+    DOM_VK_Z = keyboardLayoutMap.get('KeyZ'),
+  }
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    e.stopImmediatePropagation();
+    if (
+      e.key === keys.DOM_VK_Z &&
+      (e.metaKey || e.ctrlKey) &&
+      e.shiftKey
+    )
+      return redo();
+    if (e.key === keys.DOM_VK_Z && (e.metaKey || e.ctrlKey))
+      return undo();
+  });
+})();
 
 // tree.setItem(1, 'Root');
 // tree.setItem(2, 'Type');
@@ -114,5 +194,6 @@ const renderTree = (itemId: number = 1) => {
 };
 
 document.title = ui.title;
-loadData();
+clearHistory();
+restoreData(unpack(loadData(), '[]'));
 render();
